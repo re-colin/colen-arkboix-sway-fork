@@ -77,7 +77,7 @@ element normal.active {
 }
 element selected.normal {
     text-color: @black; /* Black selected foreground */
-    background-color: @yellow; /* Gruvbox yellow selected background */
+    background-color: @blue; /* Gruvbox yellow selected background */
 }
 element selected.urgent {
     text-color: @black;

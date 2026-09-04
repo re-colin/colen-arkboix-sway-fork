@@ -2,12 +2,11 @@
 # Sway WM Configuration File
 # AUTHOR: Arkboi X
 # CREDIT: https://github.com/arkboix
-# ADDITIONAL NOTATION: COLIN D. (https://github.com/re-colin)
 
 ### Variables
 #
 # Logo key. Use Mod1 for Alt.
-set $mod Mod1
+set $mod Mod4
 
 # Home row direction keys, like vim
 set $left h
@@ -22,14 +21,16 @@ set $term kitty
 set $menu rofi -show drun
 
 # File Manager
-set $file-manager dolphin
+set $file-manager nemo
+
+
 
 # For settings firefox as your browser, you could replace the browser line with this:
 # set $web-browser firefox
 # And same goes for any browser, just replace the command with whatever command is used to launch your browser.
 # Brave browser users need to set command as brave-bin
 # Your preferred Browser
-set $web-browser brave
+set $web-browser floorp
 
 # lock screen
 set $lock 'swaylock \
@@ -58,9 +59,11 @@ set $lock 'swaylock \
 # Set XDG_CURRENT_DESKTOP for proper Wayland support
 exec --no-startup-id dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
 
+
 # Start xdg-desktop-portal services (ensure wlr starts first)
 exec --no-startup-id /usr/lib/xdg-desktop-portal-wlr &
 exec --no-startup-id /usr/lib/xdg-desktop-portal -r
+
 
 
 ### Sov
@@ -145,7 +148,11 @@ exec swayidle -w \
 # resumed. It will also lock your screen before your computer goes to sleep.
 
 ### Font Configuration
+
 font pango:Iosevka Nerd Font Mono 12
+
+### Autostart
+
 
 ## Sway Automatic Tiling
 exec autotiling -l 2
@@ -164,10 +171,14 @@ exec wl-paste --type image --watch cliphist store &
 exec nm-applet
 
 ## Waybar
-# exec waybar
+exec waybar
 
 ## SWWW Wallpaper Daemon
 exec swww-daemon
+
+## SWWW Random Wallpaper
+exec bash -c 'swww img "$(find ~/wallpapers-extra/flowers -type f \( -iname "*.png" -o -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.webp" \) | shuf -n1)" -t none'
+
 
 ## Mako Notification
 exec mako
@@ -178,19 +189,26 @@ exec nwg-wrapper -s quick.sh -a end -p left -ml 10 -mb 10 -r 60
 exec nwg-wrapper -s quote.sh -p left -a end -mb 10 -ml 260
 
 ## Autostart Applications
+
 exec swaymsg "workspace 1; exec floorp"
 exec swaymsg "workspace 3; exec kitty"
 
 
 ### Window Rules
+
 for_window [app_id="yad"] floating enable
 for_window [app_id="org.pulseaudio.pavucontrol"] floating enable, move position center, resize set 600 400
 
 
 ### Key bindings
+#
 # Basics:
+#
     # Start a terminal
     bindsym $mod+Return exec $term
+
+    # Start Emacs
+    bindsym $mod+e exec emacsclient -c
 
     # Sticky Mode
     bindsym $mod+a exec sticky enable
@@ -200,6 +218,7 @@ for_window [app_id="org.pulseaudio.pavucontrol"] floating enable, move position 
 
     # Emoji Picker
     bindsym $mod+s exec rofi -show emoji -modi emoji -matching regex -sorting-method levenshtein
+
 
     # Lock
     bindsym $mod+shift+t exec $lock
@@ -213,24 +232,20 @@ for_window [app_id="org.pulseaudio.pavucontrol"] floating enable, move position 
     # File Manager
     bindsym $mod+y exec $file-manager
 
-    # Reload Waybar
+# Reload Waybar
     bindsym $mod+shift+a exec pkill -SIGUSR2 waybar
 
     # Call the browser variable and launch it with $mod+b
-    bindsym $mod+b exec $browser
+    bindsym $mod+b exec $web-browser
 
     # Kill focused window
     bindsym $mod+w kill
 
+
     # Wallpaper
     bindsym $mod+c exec ~/.config/sway/scripts/wallpaper.sh
-	output * background "/home/colind/Backgrounds/sky-unsplash.jpg" fill
- 
-    ## SWWW Random Wallpaper
-    # bindsym $mod+c exec bash -c 'swww img "$(find ~/colind/Backgrounds -type f \( -iname "*.png" -o -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.webp" \) | shuf -n1)" -t none'
 
-   
-# Logout
+    # Logout
     bindsym ctrl+alt+delete exec nwg-bar
 
     # Start your launcher
@@ -314,16 +329,20 @@ bindsym --release $mod+0 exec "echo 0 > /tmp/sovpipe"
 
 
 # Note: workspaces can have any name you want, not just numbers.
-   # We just use 1-10 as the default.
+    # We just use 1-10 as the default.
 #
 # Layout stuff:
+#
+
     # Switch the current container between different layout styles
     bindsym $mod+shift+s layout stacking
     bindsym $mod+t floating toggle
 
+
     # Manual Tiling Modes
-    bindsym $mod+p splith
+       bindsym $mod+p splith
     bindsym $mod+o splitv
+
 
     # Make the current focus fullscreen
     bindsym $mod+f fullscreen
@@ -336,6 +355,7 @@ bindsym --release $mod+0 exec "echo 0 > /tmp/sovpipe"
 
 #
 # Scratchpad:
+#
     # Sway has a "scratchpad", which is a bag of holding for windows.
     # You can send windows there and get them back later.
 
@@ -370,7 +390,8 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 #
-    # Utilities:
+# Utilities:
+#
     # Special keys to adjust volume via PulseAudio
     bindsym --locked XF86AudioMute exec pactl set-sink-mute \@DEFAULT_SINK@ toggle
     bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume \@DEFAULT_SINK@ -5%
@@ -379,27 +400,15 @@ bindsym $mod+r mode "resize"
     # Special keys to adjust brightness via brightnessctl
     bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
     bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
-
     # Special key to take a screenshot with grim
-#    bindsym Print exec grim "Screenshot.png"
-
-# capture all screens to clipboard    
-bindsym Shift+Print exec grim - | wl-copy    
-    
-# capture the specified screen area to clipboard    
-bindsym Shift+Alt+Print exec grim -g "$(slurp)" - | wl-copy    
-    
-# capture the focused monitor to clipboard    
-bindsym Shift+Control+Print exec grim -o $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name') - | wl-copy
+    bindsym Print exec flameshot gui
 
 #
 # Status Bar:
 #
 # Read `man 5 sway-bar` for more information about this section.
-bar {
-   position top
-   swaybar_command waybar
-}
+##bar {
+#   position top
 
 #    # When the status_command prints a new line to stdout, swaybar updates.
 #    # The default just shows the current date and time.
@@ -418,8 +427,10 @@ bar {
 include @sysconfdir@/sway/config.d/*
 
 ## Sway Borders
+
+
 # Focused window (active)
-client.focused $cyan $bg1 $fg $yellow $blue
+client.focused $cyan $bg1 $fg $yellow $cyan
 
 # Unfocused window (inactive)
 client.unfocused $bg0 $bg1 $gray $bg0 $bg1
@@ -429,8 +440,11 @@ client.urgent $yellow $bg1 $fg $yellow $yellow
 
 
 # Borders and Gaps.
-gaps inner 6
+
+gaps inner 4
 gaps outer 4
+
 default_border pixel 2
+
 titlebar_padding 8 2
 titlebar_border_thickness 2

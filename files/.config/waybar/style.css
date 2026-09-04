@@ -106,7 +106,7 @@
 }
 
 window#waybar {
-    background-color: @background;
+    background-color: #131a1f;
     color: @foreground;
 }
 
@@ -170,18 +170,18 @@ window#waybar {
 }
 
 #custom-playerctl {
-    color: @playerctl-color;
+    color: #57788f;
     border-bottom-color: @playerctl-color;
 }
 
 #custom-playerctl.Playing {
-    color: @cyan;
-    border-bottom-color: @cyan;
+    color: #57788f;
+    border-bottom-color: #d3dee6;
 }
 
 #custom-playerctl.Paused {
-    color: @orange;
-    border-bottom-color: @orange;
+    color: #57788f;    
+    border-bottom-color: #b07c48;
 }
 
 #clock {
