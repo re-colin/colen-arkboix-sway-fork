@@ -224,10 +224,10 @@ for_window [app_id="org.pulseaudio.pavucontrol"] floating enable, move position 
 
     # Wallpaper
     bindsym $mod+c exec ~/.config/sway/scripts/wallpaper.sh
-	output * background "/home/colind/Backgrounds/sky-unsplash.jpg" fill
+	output * background "$HOME/Backgrounds/brendan-miranda-0K1C90geDao-unsplash.jpg" fill
  
     ## SWWW Random Wallpaper
-    # bindsym $mod+c exec bash -c 'swww img "$(find ~/colind/Backgrounds -type f \( -iname "*.png" -o -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.webp" \) | shuf -n1)" -t none'
+    # bindsym $mod+c exec bash -c 'swww img "$(find $HOME/Backgrounds -type f \( -iname "*.png" -o -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.webp" \) | shuf -n1)" -t none'
 
    
 # Logout
@@ -349,7 +349,7 @@ bindsym --release $mod+0 exec "echo 0 > /tmp/sovpipe"
 # Resizing containers:
 #
 mode "resize" {
-    # left will shrink the containers width
+    # left will shrink the containe/s width
     # right will grow the containers width
     # up will shrink the containers height
     # down will grow the containers height
@@ -381,7 +381,7 @@ bindsym $mod+r mode "resize"
     bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
 
     # Special key to take a screenshot with grim
-#    bindsym Print exec grim "Screenshot.png"
+    bindsym Print exec grim "$HOME/Pictures/Screenshots/Screenshot$( date '+%F_%H:%M:%S' ).png"
 
 # capture all screens to clipboard    
 bindsym Shift+Print exec grim - | wl-copy    

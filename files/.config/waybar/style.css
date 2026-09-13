@@ -1,7 +1,4 @@
 /*Colorschemes, there are Gruvbox, Tokyo Night, and Everforest by default. The way it works is whichever colorscheme section is defined last will be used. Here everforest is last, but put any one you want to use as the last one.*/
-
-
-
 /* Tokyo Night */
 @define-color background #1a1b26;
 @define-color background-light #24283b;
@@ -56,11 +53,24 @@
 @define-color green #98971a;
 @define-color yellow #d79921;
 @define-color blue #458588;
-@define-color magenta #b16286;
+@define-color magenta #5d4796;
 @define-color cyan #689d6a;
 @define-color white #ebdbb2;
 @define-color orange #d65d0e;
 
+/* Colin Theme */
+@define-color background #13161c;
+@define-color background-light #1e232e;
+@define-color foreground #9eb5db;
+@define-color black #101112;
+@define-color red #913021;
+@define-color green #516938;
+@define-color yellow #f5bf42;
+@define-color blue #2c456e;
+@define-color magenta #5d4796;
+@define-color cyan #61afc9;
+@define-color white #ebdbb2;
+@define-color orange #cc8a43;
 
 
 /* Module-specific colors */
@@ -73,25 +83,25 @@
 /* Text and border colors for modules */
 @define-color mode-color @orange;
 @define-color mpd-color @magenta;
-@define-color weather-color @magenta;
+@define-color weather-color @white;
 @define-color playerctl-color @magenta;
 @define-color clock-color @blue;
-@define-color cpu-color @green;
-@define-color memory-color @magenta;
+@define-color cpu-color @blue;
+@define-color memory-color @blue;
 @define-color temperature-color @yellow;
 @define-color temperature-critical-color @red;
 @define-color battery-color @cyan;
 @define-color battery-charging-color @green;
 @define-color battery-warning-color @yellow;
 @define-color battery-critical-color @red;
-@define-color network-color @blue;
+@define-color network-color @cyan;
 @define-color network-disconnected-color @red;
 @define-color pulseaudio-color @orange;
 @define-color pulseaudio-muted-color @red;
 @define-color backlight-color @yellow;
 @define-color disk-color @cyan;
-@define-color uptime-color @green;
-@define-color updates-color @orange;
+@define-color uptime-color @white;
+@define-color updates-color @white;
 @define-color quote-color @green;
 @define-color idle-inhibitor-color @foreground;
 @define-color idle-inhibitor-active-color @red;
@@ -106,7 +116,7 @@
 }
 
 window#waybar {
-    background-color: #131a1f;
+    background-color: @background;
     color: @foreground;
 }
 
@@ -166,7 +176,7 @@ window#waybar {
 
 #custom-weather {
     color: @weather-color;
-    border-bottom-color: @weather-color;
+    border-bottom-color: @orange;
 }
 
 #custom-playerctl {
@@ -176,16 +186,16 @@ window#waybar {
 
 #custom-playerctl.Playing {
     color: #57788f;
-    border-bottom-color: #d3dee6;
+    border-bottom-color: @green;
 }
 
 #custom-playerctl.Paused {
     color: #57788f;    
-    border-bottom-color: #b07c48;
+    border-bottom-color: @red;
 }
 
 #clock {
-    color: @clock-color;
+    color: @white;
     border-bottom-color: @clock-color;
 }
 
@@ -261,12 +271,12 @@ window#waybar {
 
 #custom-uptime {
     color: @uptime-color;
-    border-bottom-color: @uptime-color;
+    border-bottom-color: @orange;
 }
 
 #custom-updates {
     color: @updates-color;
-    border-bottom-color: @updates-color;
+    border-bottom-color: @red;
 }
 
 #custom-quote {
