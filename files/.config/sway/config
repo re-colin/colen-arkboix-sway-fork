@@ -24,12 +24,8 @@ set $menu rofi -show drun
 # File Manager
 set $file-manager dolphin
 
-# For settings firefox as your browser, you could replace the browser line with this:
-# set $web-browser firefox
-# And same goes for any browser, just replace the command with whatever command is used to launch your browser.
-# Brave browser users need to set command as brave-bin
 # Your preferred Browser
-set $web-browser brave
+set $web-browser brave-bin
 
 # lock screen
 set $lock 'swaylock \
@@ -64,7 +60,6 @@ exec --no-startup-id /usr/lib/xdg-desktop-portal -r
 
 
 ### Sov
-
 exec rm -f /tmp/sovpipe && mkfifo /tmp/sovpipe && tail -f /tmp/sovpipe | sov -t 500
 
 ### Colorscheme
@@ -106,14 +101,10 @@ set $white  #ebdbb2
 set $orange #fe8019
 
 
-
 ### Output configuration
-#
-#
 output HDMI-A-1 resolution 1920x1080 position 1920,0
 
 ### Idle configuration
-#
 exec swayidle -w \
     timeout 300 'swaylock \
         --color 2d353b \
@@ -163,11 +154,11 @@ exec wl-paste --type image --watch cliphist store &
 # NetworkManager
 exec nm-applet
 
-## Waybar
+## Waybar (dont need this because swaybar launches it as its arg)
 # exec waybar
 
-## SWWW Wallpaper Daemon
-exec swww-daemon
+## AWWW Wallpaper Daemon
+exec awww-daemon
 
 ## Mako Notification
 exec mako
@@ -179,8 +170,10 @@ exec nwg-wrapper -s quote.sh -p left -a end -mb 10 -ml 260
 
 ## Autostart Applications
 exec swaymsg "workspace 1; exec floorp"
-exec swaymsg "workspace 3; exec kitty"
-
+exec swaymsg "workspace 1; exec discord"
+exec swaymsg "workspace 1; exec brave"
+exec swaymsg "workspace 2; exec firefox"
+exec ~/.config/sway/scripts/set-bg.sh
 
 ### Window Rules
 for_window [app_id="yad"] floating enable
@@ -222,13 +215,8 @@ for_window [app_id="org.pulseaudio.pavucontrol"] floating enable, move position 
     # Kill focused window
     bindsym $mod+w kill
 
-    # Wallpaper
-    bindsym $mod+c exec ~/.config/sway/scripts/wallpaper.sh
-	output * background "$HOME/Backgrounds/brendan-miranda-0K1C90geDao-unsplash.jpg" fill
- 
-    ## SWWW Random Wallpaper
-    # bindsym $mod+c exec bash -c 'swww img "$(find $HOME/Backgrounds -type f \( -iname "*.png" -o -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.webp" \) | shuf -n1)" -t none'
-
+    # AWWW Random Wallpaper
+    bindsym $mod+c exec ~/.config/sway/scripts/set-bg.sh
    
 # Logout
     bindsym ctrl+alt+delete exec nwg-bar
@@ -392,9 +380,7 @@ bindsym Shift+Alt+Print exec grim -g "$(slurp)" - | wl-copy
 # capture the focused monitor to clipboard    
 bindsym Shift+Control+Print exec grim -o $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name') - | wl-copy
 
-#
-# Status Bar:
-#
+# -- STATUS BAR --
 # Read `man 5 sway-bar` for more information about this section.
 bar {
    position top
@@ -415,18 +401,17 @@ bar {
    #}
  #}
 
+include /etc/sway/config.d/*
 include @sysconfdir@/sway/config.d/*
-
 ## Sway Borders
 # Focused window (active)
-client.focused $cyan $bg1 $fg $yellow $blue
+client.focused $cyan $bg1 $fg $blue $blue
 
 # Unfocused window (inactive)
 client.unfocused $bg0 $bg1 $gray $bg0 $bg1
 
 # Urgent window (e.g., alerts)
 client.urgent $yellow $bg1 $fg $yellow $yellow
-
 
 # Borders and Gaps.
 gaps inner 6

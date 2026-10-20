@@ -59,14 +59,14 @@
 @define-color orange #d65d0e;
 
 /* Colin Theme */
-@define-color background #13161c;
+@define-color background #0e0f0f;
 @define-color background-light #1e232e;
 @define-color foreground #9eb5db;
-@define-color black #101112;
+@define-color black #0f1012;
 @define-color red #913021;
 @define-color green #516938;
 @define-color yellow #f5bf42;
-@define-color blue #2c456e;
+@define-color blue #1c5a91;
 @define-color magenta #5d4796;
 @define-color cyan #61afc9;
 @define-color white #ebdbb2;
