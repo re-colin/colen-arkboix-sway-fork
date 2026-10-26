@@ -1,75 +1,17 @@
-/*Colorschemes, there are Gruvbox, Tokyo Night, and Everforest by default. The way it works is whichever colorscheme section is defined last will be used. Here everforest is last, but put any one you want to use as the last one.*/
-/* Tokyo Night */
-@define-color background #1a1b26;
-@define-color background-light #24283b;
-@define-color foreground #c0caf5;
-@define-color black #15161e;
-@define-color red #f7768e;
-@define-color green #9ece6a;
-@define-color yellow #e0af68;
-@define-color blue #7aa2f7;
-@define-color magenta #bb9af7;
-@define-color cyan #7dcfff;
-@define-color white #a9b1d6;
-@define-color orange #ff9e64;
-
-
-/* Everforest Dark Colors */
-@define-color background #2b3339;
-@define-color background-light #323c41;
-@define-color foreground #d3c6aa;
-@define-color black #3c474d;
-@define-color red #e67e80;
-@define-color green #a7c080;
-@define-color yellow #dbbc7f;
-@define-color blue #7fbbb3;
-@define-color magenta #d699b6;
-@define-color cyan #83c092;
-@define-color white #d3c6aa;
-@define-color orange #e69875;
-
-/* Pastel TTY Colors */
-@define-color background #212121;
-@define-color background-light #3a3a3a;
-@define-color foreground #e0e0e0;
-@define-color black #5a5a5a;
-@define-color red #ff9a9e;
-@define-color green #b5e8a9;
-@define-color yellow #ffe6a7;
-@define-color blue #63a4ff;
-@define-color magenta #dda0dd;
-@define-color cyan #a3e8e8;
-@define-color white #ffffff;
-@define-color orange #ff8952;
-
-
-
-/* Gruvbox Dark Colors */
-@define-color background #282828;
-@define-color background-light #3c3836;
-@define-color foreground #ebdbb2;
-@define-color black #32302f;
-@define-color red #cc241d;
-@define-color green #98971a;
-@define-color yellow #d79921;
-@define-color blue #458588;
-@define-color magenta #5d4796;
-@define-color cyan #689d6a;
-@define-color white #ebdbb2;
-@define-color orange #d65d0e;
-
 /* Colin Theme */
 @define-color background #0e0f0f;
 @define-color background-light #1e232e;
 @define-color foreground #9eb5db;
 @define-color black #0f1012;
 @define-color red #913021;
-@define-color green #516938;
+@define-color green #70a356;
 @define-color yellow #f5bf42;
 @define-color blue #1c5a91;
+@define-color purple-light #725fb3;
 @define-color magenta #5d4796;
 @define-color cyan #61afc9;
-@define-color white #ebdbb2;
+@define-color white #d8e4e6;
+@define-color grey #596263;
 @define-color orange #cc8a43;
 
 
@@ -90,7 +32,7 @@
 @define-color memory-color @blue;
 @define-color temperature-color @yellow;
 @define-color temperature-critical-color @red;
-@define-color battery-color @cyan;
+@define-color battery-color @green;
 @define-color battery-charging-color @green;
 @define-color battery-warning-color @yellow;
 @define-color battery-critical-color @red;
@@ -110,8 +52,8 @@
     /* Base styling for all modules */
     border: none;
     border-radius: 0;
-    font-family: "Iosevka Nerd Font";
-    font-size: 14px;
+    font-family: "JetBrainsMono Nerd Font", FontAwesome, sans-serif;
+    font-size: 13px;
     min-height: 0;
 }
 
@@ -119,7 +61,6 @@ window#waybar {
     background-color: @background;
     color: @foreground;
 }
-
 
 
 /* Common module styling with border-bottom */
@@ -181,32 +122,58 @@ window#waybar {
 
 #custom-playerctl {
     color: #57788f;
-    border-bottom-color: @playerctl-color;
+    background-color: #000000;
+    margin: 3;
 }
 
 #custom-playerctl.Playing {
-    color: #57788f;
-    border-bottom-color: @green;
+    color: @white;
 }
 
 #custom-playerctl.Paused {
-    color: #57788f;    
-    border-bottom-color: @red;
+    color: @grey;    
 }
 
-#clock {
+#clock.time {
     color: @white;
-    border-bottom-color: @clock-color;
+    background-color: #000000;
+    margin: 3;
+}
+
+#clock.date {
+    color: @white;
+    border-bottom-color: @purple-light;
+    margin: 3;
 }
 
 #cpu {
-    color: @cpu-color;
-    border-bottom-color: @cpu-color;
+    color: @white;
+    border-bottom-color: @green;
+}
+
+#cpu.warning {
+    color: @white;
+    border-bottom-color: @yellow;
+}
+
+#cpu.critical {
+    color: @white;
+    border-bottom-color: @red;
 }
 
 #memory {
-    color: @memory-color;
-    border-bottom-color: @memory-color;
+    color: @white;
+    border-bottom-color: @green;
+}
+
+#memory.warning {
+    color: @white;
+    border-bottom-color: @yellow;
+}
+
+#memory.critical {
+    color: @white;
+    border-bottom-color: @red;
 }
 
 #temperature {
@@ -240,7 +207,7 @@ window#waybar {
 }
 
 #network {
-    color: @network-color;
+    color: @white;
     border-bottom-color: @network-color;
 }
 
@@ -265,18 +232,18 @@ window#waybar {
 }
 
 #disk {
-    color: @disk-color;
-    border-bottom-color: @disk-color;
+    color: @white;
+    border-bottom-color: @cyan;
 }
 
 #custom-uptime {
     color: @uptime-color;
-    border-bottom-color: @orange;
+    border-bottom-color: @grey;
 }
 
 #custom-updates {
     color: @updates-color;
-    border-bottom-color: @red;
+    border-bottom-color: @cyan;
 }
 
 #custom-quote {
@@ -295,9 +262,9 @@ window#waybar {
 }
 
 #tray {
-    background-color: transparent;
+    background-color: #000000;
     padding: 0 10px;
-    margin: 0 2px;
+    margin: 2;
 }
 
 #tray > .passive {
