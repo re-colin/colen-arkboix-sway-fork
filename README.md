@@ -1,7 +1,4 @@
-<h1>✨ ARKBOI'S SWAY ✨</h1>
-<h2>COL D. FORK</h2>
-
-Credit goes to Arkboi X (https://github.com/arkboix) for the original config :-) I've just modified it for my own usage.
+<h3> Credit goes to Arkboi X (https://github.com/arkboix) for the original config. </h3>
 
 ## Installation 
 
